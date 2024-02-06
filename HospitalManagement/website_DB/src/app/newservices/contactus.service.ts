@@ -10,7 +10,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ContactUsService {
-  private serverUrl = 'http://localhost:3000/contactus/submit'; // Replace with your server API endpoint
+  private serverUrl = 'http://localhost:3000/addbookservice/submit'; // Replace with your server API endpoint
   private formSubmitted: boolean = false;
 
   constructor(private http: HttpClient) {}
@@ -36,7 +36,7 @@ export class ContactUsService {
 
   submitContactForm(formData: any): Observable<any> {
     // return this.http.post<any>(this.serverUrl, formData);
-    return this.http.post('http://localhost:3000/contactus/submit', formData)
+    return this.http.post('http://localhost:3000/addbookservice/submit', formData)
     .pipe(
       tap((response: any) => {
         console.log('Response from Server:', response);

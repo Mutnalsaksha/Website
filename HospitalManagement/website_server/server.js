@@ -6,20 +6,29 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Connect to MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/contactFormDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://127.0.0.1:27017/bookserviceDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Define MongoDB schema and model
-const contactUsSchema = new mongoose.Schema({
-  date: {type: Date, default: Date.now},
+const bookserviceSchema = new mongoose.Schema({
+  date: {type: String, default: () => new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })  },
   name: { type: String, required: true, minlength:3, maxlength:30},
   phoneNumber: {type: String, required: true,  match: /^[0-9]{10}$/ },
   email: { type: String, match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ },
   service:  {type: String, required: true},
   message: { type: String, required: true, minlength: 10, maxlength: 500,},
+},{
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true },
+});
+
+bookserviceSchema.virtual('formattedDate').get(function () {
+  // You can adjust the formatting options as needed
+  return new Date(this.date).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
 });
 
 
-const ContactUs = mongoose.model('ContactUs', contactUsSchema);
+const BookService = mongoose.model('BookService', bookserviceSchema);
+
 
 // Middleware
 app.use(bodyParser.json());
@@ -34,12 +43,12 @@ app.use((req, res, next) => {
 });
 
 // Route to handle form submission
-app.post('/contactus/submit', async (req, res) => {
+app.post('/addbookservice/submit', async (req, res) => {
   try {
     const { name, phoneNumber, email, service, message } = req.body;
 
-    const newContact = new ContactUs({
-      date: new Date(), 
+    const newBooking = new BookService({
+      date: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }), 
       name: name,
       phoneNumber: phoneNumber,
       email: email,
@@ -47,7 +56,7 @@ app.post('/contactus/submit', async (req, res) => {
       message: message,
     });
 
-    const savedContact = await newContact.save();
+    const savedContact = await newBooking.save();
 
     res.status(201).json(savedContact);
   } catch (error) {
