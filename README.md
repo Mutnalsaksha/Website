@@ -31,5 +31,6 @@ Bootstrap
 1. cd backend
 2. node server.js
 
-3.Open New terminal
-4.ng serve
+3. Open New Terminal
+2. ng serve
+
