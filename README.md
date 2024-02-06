@@ -27,10 +27,9 @@ Bootstrap
 4. ng serve
 
 ## How to run Dashboard
-
 1. cd backend
 2. node server.js
 
 3. Open New Terminal
-2. ng serve
+4. ng serve
 
