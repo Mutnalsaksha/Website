@@ -36,12 +36,12 @@ const bookserviceSchema = new mongoose.Schema({
   });
   
   
-  const BookService = mongoose.model('BookService', bookserviceSchema, 'bookservice');
+  const BookServices = mongoose.model('BookServices', bookserviceSchema, 'bookservices');
 
   
   app.get('/getbookedservice/data', async (req, res) => {
     try {
-      const data = await BookService.find();
+      const data = await BookServices.find();
       res.json(data);
     } catch (error) {
       console.error(error);

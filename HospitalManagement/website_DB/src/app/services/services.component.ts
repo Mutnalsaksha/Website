@@ -59,7 +59,7 @@ export class ServicesComponent implements OnInit{
     {
       dataCategory: 'others',
       title: 'Nutritionist',
-      description: 'Elevate your well-being with personalized nutrition guidance. Experienced nutritionists provide tailored advice and support to help you achieve your health goals, all from the comfort of your home.',
+      description: 'Elevate well-being with personalized nutrition guidance. Experienced nutritionists provide tailored advice and support to help achieve your health goals, all from the comfort of your home.',
       imageUrl: 'assets/Nutritionist.jpg'
     },
     {
