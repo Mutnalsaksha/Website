@@ -462,6 +462,12 @@ background-color: #eead20;
   width: 100%;
 }
 
+.alert {
+  position:absolute;
+   margin-top: -41px; 
+  color: red;
+  
+}
 
 /* client Section */
 
